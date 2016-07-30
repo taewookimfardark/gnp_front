@@ -4,7 +4,7 @@ gnp_app.service('httpRequest', ['$http', function($http)
     {   
         return $http(
             {   "method": method,
-                "url": "http://localhost:3000/" + api,
+                "url": "http://localhost:3000/api" + api,
                 "headers": {'Content-Type': 'application/json'},
                 "data": data
             }
