@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div class='md-padding' layout="row" layout-wrap layout-align="center">
+    <md-card flex="40" ng-repeat ="match in matchList">
+        <md-card-title  md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch="">
+            <md-card-title-text layout-wrap>
+                <span class="md-headline">{{match.tag}}  vs {{match.against}}</span>
+                <span class="md-subhead" layout-align="end start">{{match.when}}</span>
+                <span class="md-subhead" layout-align="end start">장소 : {{match.where}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout-wrap>
+            <p>{{match.matchinfo}}</p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end">
+            <md-button ng-hide="match.finish" ui-sref="matchrecord" ng-click="getId($event,match._id)">기록하기</md-button>
+            <md-button ng-show="match.finish" ng-click="showDetail($event,match._id)">상세보기</md-button>
+            <md-button>수정</md-button>
+        </md-card-actions>
+    </md-card>
+</div>
+</body>
+</html>

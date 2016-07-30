@@ -1,0 +1,22 @@
+<div class='md-padding' layout="row" layout-wrap layout-align="center">
+<md-dialog aria-label="경기결과"  ng-cloak>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>경기결과  {{matchDetail.tag}}  vs  {{matchDetail.against}}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>{{matchDetail.matchinfo}}</p>
+                <div ng-repeat="member in matchDetail.members">
+                    <p>{{member}}</p>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="roe" ng-click="closeDialog()">
+            <md-button class="md-button-icon" ng-click="dc.closeDialog()">확인</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+</div>

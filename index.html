@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GNP</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/angular-ui-grid/ui-grid.min.css">
+    <link href="node_modules/angular-material/angular-material.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="src/css/style.css">
+</head>
+<body ng-app="gnp_app" layout="column">
+    <md-toolbar layout="row">
+        <h1>GNP</h1>
+    </md-toolbar>
+
+    <div class="container" layout="row" flex>
+        <md-sidenav md-is-locked-open="true" layout="column">
+            <md-toolbar>user info</md-toolbar>
+            <md-list role="list" layout="column" layout-align="center">
+                    <md-button ui-sref="login" class="login" ng-hide="loginsuccess">로그인</md-button>
+                    <md-button ui-sref="mypage" class="mypage" ng-show="loginsuccess">내정보</md-button>
+                    <md-button ui-sref="main" class="main" ng-show="loginsuccess">메인</md-button>
+                    <md-button ui-sref="matchschedule" class="matchschedule" ng-show="loginsuccess">
+                        경기 일정/결과
+                    </md-button>
+                    <md-button ui-sref="playerresult" class="playerresult" ng-show="loginsuccess">선수기록</md-button>
+                    <md-button ui-sref="logout" class="logout" ng-show="loginsuccess">log out</md-button>
+                </md-list>
+        </md-sidenav>
+        <md-content flex id="content"flex>
+            <div class="view" ui-view></div>
+        </md-content>
+    </div>
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="node_modules/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/matchController.js"></script>
+    <script src="controllers/matchDetailController.js"></script>
+    <script src="controllers/matchRecordController.js"></script>
+    <script src="controllers/playerRecordController.js"></script>
+    <script src="controllers/joinController.js"></script>
+    <script src="controllers/logoutController.js"></script>
+    <script src="controllers/loginController.js"></script>
+    <script src="controllers/mypageController.js"></script>
+    <script src="services/httpRequest.js"></script>
+    <script src="services/localStorage.js"></script>
+
+</body>
+</html>

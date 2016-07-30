@@ -1,0 +1,53 @@
+<div class="container" layout="row">
+    <md-sidenav md-is-locked-open="true" layout="column" class="md-whiteframe-1dp" flex>
+        <md-list role="list">
+            <div class="md-3-line" ng-repeat=" user in userCheckbox | filter: {ischecked : false}">
+                <md-checkbox ng-model="user.ischecked">
+                    {{user.name}} {{user.number}}
+                </md-checkbox>
+            </div>
+        </md-list>
+    </md-sidenav>
+    <md-content id="content" class="md-whiteframe-1dp" flex>
+        <div>{{matchDetail.tag}}  vs  {{matchDetail.against}}</div>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>About</label>
+            <input data-ng-model="matchinfo">
+        </md-input-container>
+        <md-switch data-ng-model="wincheck" aria-label="Switch 1" ng-click="check()">
+            경기결과: {{matchresult}}
+        </md-switch>
+        <div>
+        <md-list role="list">
+            <div class="md-3-line" ng-repeat=" user in userCheckbox | filter: {ischecked : true}" layout-gt-sm="row">
+                <md-checkbox ng-model="user.ischecked">
+                </md-checkbox>
+                    <div ng-repeat="player in matchPlayerRecord"></div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Name</label>
+                            <input data-ng-model="player.name" ng-init="player.name = user.name">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Back number</label>
+                            <input data-ng-model="player.backnumber" ng-init="player.backnumber = user.number">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Points</label>
+                            <input data-ng-model="player.points">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Assists</label>
+                            <input data-ng-model="player.assists">
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Rebounds</label>
+                            <input data-ng-model="player.rebounds">
+                        </md-input-container>
+                        <md-switch aria-label="Switch 1" ng-click="addplayer(player)">
+                        </md-switch>
+                    </div>
+            <button ng-click="addmatch()">경기기록</button>
+        </md-list>
+        </div>
+    </md-content>
+</div>
