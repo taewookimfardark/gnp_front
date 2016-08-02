@@ -33,4 +33,3 @@ skip_files:
 - ^fabfile\.py
 - ^testrunner\.py
 - ^grunt\.js
-- ^public/node_modules/(.*/)?
