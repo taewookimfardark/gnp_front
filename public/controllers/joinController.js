@@ -4,17 +4,7 @@ gnp_app.controller('joinController', ["$scope","httpRequest","$state", function 
         "email": '',
         "password": '',
         "name": '',
-        "backnumber": '',
-        "records":
-        {
-            "games" : 0,
-            "backnumber" : 0,
-            "points" : 0,
-            "assists" : 0,
-            "rebounds" : 0,
-            "blocks" : 0,
-            "steals" : 0
-        }        
+        "backnumber": ''
     };
     
     $scope.join = function()
@@ -25,7 +15,7 @@ gnp_app.controller('joinController', ["$scope","httpRequest","$state", function 
                 {
                     console.log("success");
                     console.log(res);
-                    alert("선수등록을 완하셨습니다");
+                    alert("선수등록을 완료하셨습니다");
                     $state.go("login");
 
                 }
