@@ -13,33 +13,33 @@ gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$sta
 
     $scope.login = function()
     {
-        httpRequest.send('GET','users')
+        httpRequest.send('POST','login',$scope.userData)
             .then(
                 function(res)
                 {
-                    for (var userinfo in res.data)
+                    if(res.data.data==null)
                     {
-                        if(res.data[userinfo].email == $scope.userData.email && res.data[userinfo].password == $scope.userData.password)
-                        {
-                            $scope.logincheck = true
-
-                        }
-                    }
-
-                    if($scope.logincheck)
-                    {
-                        $state.go('main');
+                        alert(res.data.userMessage)
                     }
                     else
                     {
-                        alert("fail");
+                        $state.go('main');
+                        console.log(res.data.data);
                     }
+                    // if($scope.logincheck)
+                    // {
+                    //     $state.go('main');
+                    // }
+                    // else
+                    // {
+                    //     alert("fail");
+                    // }
 
                 },
                 function(res)
                 {   
                     console.log(res);
-                    alert("fail");
+                    // alert("fail");
                 }
 
             );
