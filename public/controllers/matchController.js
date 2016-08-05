@@ -7,7 +7,7 @@ gnp_app.controller("matchController", ["$scope", "httpRequest","$mdDialog","$mdM
             function(res)
             {
                 console.log(res);
-                $scope.matchList = res.data;
+                $scope.matchList = res.data.data;
                 console.log("matchlist");
                 console.log($scope.matchList);
             },
