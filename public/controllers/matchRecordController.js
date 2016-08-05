@@ -5,6 +5,7 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
     $scope.matchPlayerRecord=[
         {
             name : '',
+            backnumber : '',
             points : '',
             assists : '',
             rebounds : ''
@@ -30,6 +31,20 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
         matchinfo : $scope.matchinfo,
         members : $scope.matchPlayerRecord
     };
+
+    httpRequest.send('GET','matchrecord'+$rootScope.matchId)
+    {
+        $scope.userList = res.data.userdata;
+        for(var i=0;i<res.data.data.length;i++)
+        {
+            var temp = {number:res.data.data[i].backnumber,name:res.data.data[i].name, ischecked:false};
+            console.log(temp);
+            $scope.userCheckbox.push(temp);
+            console.log($scope.userCheckbox);
+        }
+
+        $scope.matchDetail = res.data.data;
+    }
     
     
 
@@ -46,17 +61,17 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
                     console.log(typeof(player.name));
                     console.log(player.backnumber);
                     console.log(typeof(player.backnumber));
-                    for(var playerindex in res.data)
+                    for(var playerindex in res.data.data)
                     {
-                        if(player.name==res.data[playerindex].name && parseInt(player.backnumber)==res.data[playerindex].backnumber)
+                        if(player.name==res.data.data[playerindex].name && parseInt(player.backnumber)==res.data.data[playerindex].backnumber)
                         {
                             console.log(playerindex);
                             $scope.temprecord =
                             {
-                                    "games" : res.data[playerindex].records.games + 1,
-                                    "points" : res.data[playerindex].records.points + parseInt(player.points),
-                                "rebounds": res.data[playerindex].records.rebounds + parseInt(player.rebounds),
-                                    "assists" : res.data[playerindex].records.assists + parseInt(player.assists)
+                                    "games" : res.data.data[playerindex].records.games + 1,
+                                    "points" : res.data.data[playerindex].records.points + parseInt(player.points),
+                                "rebounds": res.data.data[playerindex].records.rebounds + parseInt(player.rebounds),
+                                    "assists" : res.data.data[playerindex].records.assists + parseInt(player.assists)
                             };
 
                             $scope.updaterecord =
@@ -96,10 +111,10 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
             {
                 console.log(res);
                 console.log(res.data);
-                $scope.userList = res.data;
-                for(var i=0;i<res.data.length;i++)
+                $scope.userList = res.data.data;
+                for(var i=0;i<res.data.data.length;i++)
                 {
-                    var temp = {number:res.data[i].backnumber,name:res.data[i].name, ischecked:false};
+                    var temp = {number:res.data.data[i].backnumber,name:res.data.data[i].name, ischecked:false};
                     console.log(temp);
                     $scope.userCheckbox.push(temp);
                     console.log($scope.userCheckbox);
@@ -117,8 +132,8 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
             function(res)
             {
                 console.log("matchdetail");
-                console.log(res);
-                $scope.matchDetail = res.data;
+                $scope.matchDetail = res.data.data;
+                console.log($scope.matchDetail);
             },
             function(res)
             {
@@ -127,12 +142,6 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
             }
         );
 
-    
-    $scope.console = function()
-    {
-        console.log($scope.matchPlayerRecord);
-        console.log($scope.matchupdate);
-    };
 
     $scope.addmatch = function()
     {
