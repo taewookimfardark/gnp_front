@@ -22,29 +22,26 @@
             <div class="md-3-line" ng-repeat=" user in userCheckbox | filter: {ischecked : true}" layout-gt-sm="row">
                 <md-checkbox ng-model="user.ischecked">
                 </md-checkbox>
-                    <div ng-repeat="player in matchPlayerRecord"></div>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Name</label>
-                            <input data-ng-model="player.name" ng-init="player.name = user.name">
+                            <input data-ng-model="user.name" ng-init="player.name = user.name">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Back number</label>
-                            <input data-ng-model="player.backnumber" ng-init="player.backnumber = user.number">
+                            <input data-ng-model="user.backnumber" ng-init="user.backnumber = user.backnumber">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Points</label>
-                            <input data-ng-model="player.points">
+                            <input data-ng-model="user.point">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Assists</label>
-                            <input data-ng-model="player.assists">
+                            <input data-ng-model="user.assist">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Rebounds</label>
-                            <input data-ng-model="player.rebounds">
+                            <input data-ng-model="user.rebound">
                         </md-input-container>
-                        <md-switch aria-label="Switch 1" ng-click="addplayer(player)">
-                        </md-switch>
                     </div>
             <button ng-click="addmatch()">경기기록</button>
         </md-list>
