@@ -12,8 +12,18 @@
         <div>{{matchDetail.tag}}  vs  {{matchDetail.against}}</div>
         <md-input-container class="md-block" flex-gt-sm>
             <label>About</label>
-            <input data-ng-model="matchinfo">
+            <input data-ng-model="matchupdate.matchinfo">
         </md-input-container>
+        <div class="score" layout="column">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>scoregnp</label>
+                <input data-ng-model="matchupdate.scoregnp">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>scoreenemy</label>
+                <input data-ng-model="matchupdate.scoreenemy">
+            </md-input-container>
+        </div>
         <md-switch data-ng-model="wincheck" aria-label="Switch 1" ng-click="check()">
             경기결과: {{matchresult}}
         </md-switch>

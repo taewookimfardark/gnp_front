@@ -24,12 +24,15 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
     };
     
     $scope.matchinfo = "";
+    $scope.scoregnp = "";
+    $scope.scoreenemy = "";
     
     $scope.matchupdate = {
         finish : true,
         win : $scope.wincheck,
         matchinfo : $scope.matchinfo,
-        members : $scope.matchPlayerRecord
+        score_gnp : $scope.scoregnp,
+        score_enemy : $scope.scoreenemy
     };
 
     httpRequest.send('GET','matchrecord/'+$rootScope.matchId)
@@ -56,14 +59,29 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
 
     $scope.addmatch = function()
     {
-        console.log($scope.userCheckbox);
+        $scope.matchdata = [$scope.matchupdate, $scope.userCheckbox];
         httpRequest.send('POST','recordusers',$scope.userCheckbox)
             .then(
                 function(res)
                 {
                     console.log(res);
-                    alert("추가 완료");
-                    $state.go('matchschedule');
+                    console.log("선수기록 추가완료");
+                    httpRequest.send('PUT', 'recordmatches/'+$rootScope.matchId, $scope.matchdata)
+                        .then(
+                            function(res)
+                            {
+                                console.log("match update!");
+                                console.log(res);
+                                alert("추가 완료!");
+                                $state.go('matchschedule');
+                            },
+                            function(res)
+                            {
+                                alert("fail");
+                                console.log(res);
+                            }
+
+                        );
                 },
                 function(res)
                 {
@@ -71,22 +89,6 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
                     console.log(res);
                 }
             );
-        // httpRequest.send('PUT','matches/'+$rootScope.matchId,$scope.matchupdate)
-        //     .then(
-        //         function(res)
-        //         {
-        //             console.log("match update!");
-        //             console.log(res);
-        //             alert("추가 완료!");
-        //             $state.go('matchschedule');
-        //
-        //         },
-        //         function(res)
-        //         {
-        //             alert("fail");
-        //             console.log(res);
-        //         }
-        //     );
     };
 
     
