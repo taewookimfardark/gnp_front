@@ -32,19 +32,26 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
         members : $scope.matchPlayerRecord
     };
 
-    httpRequest.send('GET','matchrecord'+$rootScope.matchId)
-    {
-        $scope.userList = res.data.userdata;
-        for(var i=0;i<res.data.data.length;i++)
-        {
-            var temp = {number:res.data.data[i].backnumber,name:res.data.data[i].name, ischecked:false};
-            console.log(temp);
-            $scope.userCheckbox.push(temp);
-            console.log($scope.userCheckbox);
-        }
+    httpRequest.send('GET','matchrecord/'+$rootScope.matchId)
+        .then(
+            function(res)
+            {
+                $scope.userData = res.data.userdata;
+                for (var i = 0; i < res.data.userdata.length; i++) {
+                    var temp = {number: res.data.userdata[i].backnumber, name: res.data.userdata[i].name, ischecked: false};
+                    console.log(temp);
+                    $scope.userCheckbox.push(temp);
+                    console.log($scope.userCheckbox);
+                }
 
-        $scope.matchDetail = res.data.data;
-    }
+                $scope.matchDetail = res.data.matchdata;
+            },
+            function(res)
+            {
+                alert("fail");
+                console.log(res);
+            });
+
     
     
 
