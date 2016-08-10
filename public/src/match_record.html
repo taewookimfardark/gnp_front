@@ -17,11 +17,11 @@
         <div class="score" layout="column">
             <md-input-container class="md-block" flex-gt-sm>
                 <label>scoregnp</label>
-                <input data-ng-model="matchupdate.scoregnp">
+                <input type="number" data-ng-model="matchupdate.scoregnp">
             </md-input-container>
             <md-input-container class="md-block" flex-gt-sm>
                 <label>scoreenemy</label>
-                <input data-ng-model="matchupdate.scoreenemy">
+                <input type="number" data-ng-model="matchupdate.scoreenemy">
             </md-input-container>
         </div>
         <md-switch data-ng-model="wincheck" aria-label="Switch 1" ng-click="check()">
@@ -34,26 +34,27 @@
                 </md-checkbox>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Name</label>
-                            <input data-ng-model="user.name" ng-init="player.name = user.name">
+                            <input data-ng-model="user.name">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Back number</label>
-                            <input data-ng-model="user.backnumber" ng-init="user.backnumber = user.backnumber">
+                            <input data-ng-model="user.backnumber">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Points</label>
-                            <input data-ng-model="user.point">
+                            <input type="number" data-ng-model="user.point">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Assists</label>
-                            <input data-ng-model="user.assist">
+                            <input type="number" data-ng-model="user.assist">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Rebounds</label>
-                            <input data-ng-model="user.rebound">
+                            <input type="number" data-ng-model="user.rebound">
                         </md-input-container>
                     </div>
             <button ng-click="addmatch()">경기기록</button>
+            <button ng-click="consolecheck()">콘솔체크</button>
         </md-list>
         </div>
     </md-content>

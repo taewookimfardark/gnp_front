@@ -41,7 +41,7 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
             {
                 $scope.userData = res.data.userdata;
                 for (var i = 0; i < res.data.userdata.length; i++) {
-                    var temp = {userid : res.data.userdata[i].id, matchid : $rootScope.matchId, backnumber: res.data.userdata[i].backnumber, name: res.data.userdata[i].name, ischecked: false, point : "",rebound:"",assist:""};
+                    var temp = {userid : res.data.userdata[i].id, matchid : $rootScope.matchId, backnumber: res.data.userdata[i].backnumber, name: res.data.userdata[i].name, ischecked: false, point : 0,rebound: 0,assist: 0};
                     console.log(temp);
                     $scope.userCheckbox.push(temp);
                     console.log($scope.userCheckbox);
@@ -90,6 +90,11 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
                 }
             );
     };
+
+    $scope.consolecheck = function()
+    {
+        console.log($scope.userCheckbox);
+    }
 
     
 
