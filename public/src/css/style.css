@@ -6,3 +6,14 @@
 .stretch input  {
     width: 100%
 }
+
+img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:10px;
+}

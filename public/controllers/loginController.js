@@ -22,7 +22,8 @@ gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$sta
             else
             {
                 $state.go('main');
-                console.log(res.data.data);
+                $rootScope.toolbarUserData = collbackData.data;
+                console.log($rootScope.toolbarUserData);
             }
         });
     };

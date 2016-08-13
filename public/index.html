@@ -14,8 +14,11 @@
 
     <div class="container" layout="row" flex>
         <md-sidenav md-is-locked-open="true" layout="column">
-            <md-toolbar>user info</md-toolbar>
-            <md-list role="list" layout="column" layout-align="center">
+            <md-toolbar style="background-color:gainsboro; text-align:center;" layout="column" ng-show="loginsuccess">
+                <img src="src/img/curry.jpg" align="right">
+                <p>NO.{{toolbarUserData.backnumber}} {{toolbarUserData.name}}</p>
+            </md-toolbar>
+            <md-list role="list" layout="column">
                     <md-button ui-sref="login" class="login" ng-hide="loginsuccess">로그인</md-button>
                     <md-button ui-sref="mypage" class="mypage" ng-show="loginsuccess">내정보</md-button>
                     <md-button ui-sref="main" class="main" ng-show="loginsuccess">메인</md-button>
