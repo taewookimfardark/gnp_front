@@ -11,7 +11,7 @@ gnp_app.controller("matchDetailController", ["$scope","$mdDialog","$mdMedia","ht
                 function(res)
                 {
                     console.log(res);
-                    $scope.matchDetail = res.data;
+                    $scope.matchDetail = res.data.data;
                 },
                 function(res)
                 {

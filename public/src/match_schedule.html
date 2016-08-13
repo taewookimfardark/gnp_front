@@ -20,7 +20,7 @@
         </md-card-content>
         <md-card-actions layout="row" layout-align="end">
             <md-button ng-hide="match.finish" ui-sref="matchrecord" ng-click="getId($event,match.id)">기록하기</md-button>
-            <md-button ng-show="match.finish" ng-click="showDetail($event,match._id)">상세보기</md-button>
+            <md-button ng-show="match.finish" ng-click="showDetail($event,match.id)">상세보기</md-button>
             <md-button>수정</md-button>
         </md-card-actions>
     </md-card>

@@ -1,8 +1,8 @@
-gnp_app.controller("matchController", ["$scope", "httpRequest","$mdDialog","$mdMedia","$rootScope", function ($scope, httpRequest, $mdDialog, $mdMedia, $rootScope)
+gnp_app.controller("matchController", ["$scope", "httpRequest","$mdDialog","$mdMedia","$rootScope",
+    function ($scope, httpRequest, $mdDialog, $mdMedia, $rootScope)
 {
 
-    // htt request
-    httpRequest.send('GET','matches')
+    httpRequest.send('GET','matches/')
         .then(
             function(res)
             {
@@ -17,6 +17,27 @@ gnp_app.controller("matchController", ["$scope", "httpRequest","$mdDialog","$mdM
                 console.log(res);
             }
         );
+
+    // $scope.matchList = matchDataSvc.data;
+    // $rootScope.$watch(function () {
+    //     return matchDataSvc.data;
+    // }, function(n, o){
+    //     $scope.matchList = n;
+    // })
+    // //     .then(''
+    // //         function(res)
+    // //         {
+    // //             console.log(res);
+    // //             $scope.matchList = res.data.data;
+    // //             console.log("matchlist");
+    // //             console.log($scope.matchList);
+    // //         },
+    // //         function(res)
+    // //         {
+    // //             alert("fail");
+    // //             console.log(res);
+    // //         }
+    // //     );
     
     
     // dialog setting 

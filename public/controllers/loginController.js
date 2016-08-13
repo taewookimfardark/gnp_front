@@ -1,9 +1,9 @@
-gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$state", function ($scope,$rootScope,httpRequest, $state) {
+gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$state", "usersService",function ($scope,$rootScope,httpRequest, $state,usersService) {
     
     $rootScope.loginsuccess = false;
 
     $scope.logincheck = false;
-    $scope.userData =
+    $scope.loginUserData =
     {
         "email":'',
         "password":''
@@ -13,36 +13,18 @@ gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$sta
 
     $scope.login = function()
     {
-        httpRequest.send('POST','login',$scope.userData)
-            .then(
-                function(res)
-                {
-                    if(res.data.data==null)
-                    {
-                        alert(res.data.userMessage)
-                    }
-                    else
-                    {
-                        $state.go('main');
-                        console.log(res.data.data);
-                    }
-                    // if($scope.logincheck)
-                    // {
-                    //     $state.go('main');
-                    // }
-                    // else
-                    // {
-                    //     alert("fail");
-                    // }
-
-                },
-                function(res)
-                {   
-                    console.log(res);
-                    // alert("fail");
-                }
-
-            );
+        usersService.logIn($scope.loginUserData,function(collbackData)
+        {
+            if(collbackData.data == null)
+            {
+                alert(collbackData.userMessage);
+            }
+            else
+            {
+                $state.go('main');
+                console.log(res.data.data);
+            }
+        });
     };
 
 }]);
