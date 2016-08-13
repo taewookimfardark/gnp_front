@@ -42,8 +42,10 @@ gnp_app.service('usersService', ['httpRequest', function (httpRequest) {
             .then(
                 function(res)
                 {
+                    console.log(res);
                     userService.userdataLoginCheck.push(res.data);
-                    callback(res.data);
+                    temp = res.data;
+                    callback(temp);
                 },
                 function(res)
                 {

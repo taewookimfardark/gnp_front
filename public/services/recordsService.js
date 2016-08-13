@@ -3,6 +3,7 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
     var recordService = this;
     recordService.playerRecordData = ["nothing"];
     recordService.matchRecordData = ["nothing"];
+    recordService.playerRecordJoinUser = ["nothing"];
 
     httpRequest.send('GET','playerrecords')
         .then(
@@ -26,6 +27,19 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
             function(res)
             {
                 alert("fail to get match records");
+                console.log(res);
+            }
+        );
+
+    httpRequest.send('GET','recordpage')
+        .then(
+            function(res)
+            {
+                recordService.playerRecordJoinUser.push(res.data.data);
+            },
+            function(res)
+            {
+                alert("fail to get player join user");
                 console.log(res);
             }
         );

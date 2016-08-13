@@ -1,31 +1,30 @@
-gnp_app.controller('playerRecordController', ["$scope", "httpRequest", function ($scope, httpRequest) {
+gnp_app.controller('playerRecordController', ["$scope", "httpRequest","recordsService","$rootScope", function ($scope, httpRequest,
+recordsService,$rootScope) {
 
     $scope.playerrecord = [];
-    httpRequest.send('GET','playerrecord/page')
-        .then(
-            function(res)
-            {
-                console.log(res);
-                for(var index in res.data.data)
-                {
-                    var temp = {"Name" :'',"Backnumber":'',"Games":'',"Points":'',"Rebounds":'',"Assists":''}
-                    temp.Name = res.data.data[index][0].name;
-                    temp.Backnumber = res.data.data[index][0].backnumber;
-                    temp.Games = res.data.data[index][1].games;
-                    temp.Points = parseFloat(res.data.data[index][1].points/temp.Games).toFixed(2);
-                    temp.Rebounds = parseFloat(res.data.data[index][1].rebounds/temp.Games).toFixed(2);
-                    temp.Assists = parseFloat(res.data.data[index][1].assists/temp.Games).toFixed(2);
-                    
-                    $scope.playerrecord.push(temp);
-                    
-                }
 
-            },
-            function(res)
+    $rootScope.$watch(function()
+    {
+        return recordsService.playerRecordJoinUser[1];
+    },
+        function(newValue,oldValue)
+        {
+            console.log(newValue);
+            for(var index = 0; index < newValue.length; index ++)
             {
-                alert("fail");
-                console.log(res);
+                console.log("dfdf");
+                var temp = {"Name" :'',"Backnumber":'',"Games":'',"Points":'',"Rebounds":'',"Assists":''};
+                temp.Name = newValue[index]['user'].name;
+                temp.Backnumber = newValue[index]['user'].backnumber;
+                temp.Games = newValue[index]['record'].games;
+                temp.Points = parseFloat(newValue[index]['record'].points/temp.Games).toFixed(2);
+                temp.Rebounds = parseFloat(newValue[index]['record'].rebounds/temp.Games).toFixed(2);
+                temp.Assists = parseFloat(newValue[index]['record'].assists/temp.Games).toFixed(2);
+
+                $scope.playerrecord.push(temp);
             }
-        );
+            console.log(oldValue);
+        }
+    );
 
 }]);
