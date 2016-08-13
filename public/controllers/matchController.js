@@ -1,44 +1,15 @@
-gnp_app.controller("matchController", ["$scope", "httpRequest","$mdDialog","$mdMedia","$rootScope",
-    function ($scope, httpRequest, $mdDialog, $mdMedia, $rootScope)
+gnp_app.controller("matchController", ["$scope", "httpRequest","$mdDialog","$mdMedia","$rootScope", "matchesService", "$rootScope",
+    function ($scope, httpRequest, $mdDialog, $mdMedia, $rootScope, matchesService)
 {
 
-    httpRequest.send('GET','matches/')
-        .then(
-            function(res)
-            {
-                console.log(res);
-                $scope.matchList = res.data.data;
-                console.log("matchlist");
-                console.log($scope.matchList);
-            },
-            function(res)
-            {
-                alert("fail");
-                console.log(res);
-            }
-        );
+    $scope.matchList = matchesService.matchdata[1];
+    $rootScope.$watch(function () {
+        return matchesService.matchdata[1];
+    }, function (newValue, oldValue) {
+        $scope.matchList = newValue;
+        console.log(oldValue);
+    });
 
-    // $scope.matchList = matchDataSvc.data;
-    // $rootScope.$watch(function () {
-    //     return matchDataSvc.data;
-    // }, function(n, o){
-    //     $scope.matchList = n;
-    // })
-    // //     .then(''
-    // //         function(res)
-    // //         {
-    // //             console.log(res);
-    // //             $scope.matchList = res.data.data;
-    // //             console.log("matchlist");
-    // //             console.log($scope.matchList);
-    // //         },
-    // //         function(res)
-    // //         {
-    // //             alert("fail");
-    // //             console.log(res);
-    // //         }
-    // //     );
-    
     
     // dialog setting 
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
@@ -65,13 +36,8 @@ gnp_app.controller("matchController", ["$scope", "httpRequest","$mdDialog","$mdM
 
     $scope.getId = function(ev,matchid)
     {
-        console.log("getid is on");
         $rootScope.matchId = matchid;
-        console.log($rootScope.matchId);
     };
-    
-    
-    
 
 
 }]);

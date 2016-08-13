@@ -1,25 +1,19 @@
-gnp_app.controller("matchDetailController", ["$scope","$mdDialog","$mdMedia","httpRequest","$rootScope", function ($scope,$mdDialog,$mdMedia,httpRequest,$rootScope) {
+gnp_app.controller("matchDetailController", ["$scope","$mdDialog","$mdMedia","httpRequest","$rootScope","matchesService", 
+    function ($scope,$mdDialog,$mdMedia,httpRequest,$rootScope,matchesService){
 
         // dialog controller
         $scope.closeDialog = function() {
             $mdDialog.hide();
         };
-
-        // http request
-        httpRequest.send('GET','matches/'+$rootScope.matchId)
-            .then(
-                function(res)
-                {
-                    console.log(res);
-                    $scope.matchDetail = res.data.data;
-                },
-                function(res)
-                {
-                    alert("fail");
-                    console.log(res);
-                }
-            );
-
+        
+        $scope.matchDetail = matchesService.getMatchById($rootScope.matchId);
+        $rootScope.$watch(function(){
+            return matchesService.matchdataDetail[1];
+        },function(newValue,oldValue)
+        {
+            $scope.matchDetail = newValue;
+            console.log(oldValue);
+        });
 
         
 }]);
