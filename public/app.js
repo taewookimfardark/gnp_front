@@ -44,7 +44,8 @@ gnp_app.config(function($stateProvider, $urlRouterProvider)
         })
         .state('main',{
             url: "/main",
-            templateUrl: "src/main.html"
+            templateUrl: "src/main.html",
+            controller: "mainController"
         })
         .state('matchschedule',{
             url: "/matchschedule",

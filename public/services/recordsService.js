@@ -4,6 +4,7 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
     recordService.playerRecordData = ["nothing"];
     recordService.matchRecordData = ["nothing"];
     recordService.playerRecordJoinUser = ["nothing"];
+    recordService.playerRecordDataByUserID = ["nothing"];
 
     httpRequest.send('GET','playerrecords')
         .then(
@@ -43,6 +44,22 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                 console.log(res);
             }
         );
+
+    recordService.getRecordByUserId = function(userId)
+    {
+        httpRequest.send('GET','matchrecords/user/'+userId)
+            .then(
+                function(res)
+                {
+                    recordService.playerRecordDataByUserID.append(res.data.data);
+                },
+                function(res)
+                {
+                    alert("fail to get match record by user id");
+                    console.log(res);
+                }
+            )
+    };
     
     recordService.addUserRecord = function(data) {
 
