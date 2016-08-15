@@ -1,31 +1,37 @@
 gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
     
     var matchService = this;
-    matchService.matchdata = ["nothing"];
-    matchService.matchdataDetail = ["nothing"];
+    matchService.matchdata = [];
+    matchService.matchdataDetail = [];
     
-    httpRequest.send('GET','matches')
-        .then(
-            function(res)
-            {
-                matchService.matchdata.push(res.data.data);
-                console.log(res.data.data);
-            },
-            function(res)
-            {
-                alert("fail to get matches");
-                console.log(res);
-            }
-        );
-    
-    matchService.getMatchById = function(matchId)
+    matchService.getMatches = function(callback)
     {
-        httpRequest.send('GET','matches'+matchId)
+        httpRequest.send('GET','matches')
+            .then(
+                function(res)
+                {
+                    matchService.matchdata.push(res.data.data);
+                    console.log(res.data.data);
+                    callback(res);
+                },
+                function(res)
+                {
+                    alert("fail to get matches");
+                    console.log(res);
+                }
+            );    
+    };
+    
+    
+    matchService.getMatchById = function(matchId,callback)
+    {
+        httpRequest.send('GET','matches/'+matchId)
             .then(
                 function(res)
                 {
                     matchService.matchdataDetail.push(res.data.data);
                     console.log(res.data.data);
+                    callback(res);
                 },
                 function(res)
                 {
@@ -34,7 +40,6 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                 }
             );
         
-        return matchService.matchdataDetail;
     };
     
 }]);

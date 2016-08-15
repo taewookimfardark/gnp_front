@@ -5,15 +5,21 @@ gnp_app.controller("matchDetailController", ["$scope","$mdDialog","$mdMedia","ht
         $scope.closeDialog = function() {
             $mdDialog.hide();
         };
-        
-        $scope.matchDetail = matchesService.getMatchById($rootScope.matchId);
-        $rootScope.$watch(function(){
-            return matchesService.matchdataDetail[1];
-        },function(newValue,oldValue)
+
+        $scope.matchDetail = matchesService.matchdataDetail[0];
+        matchesService.getMatchById($rootScope.matchId,function(res)
         {
-            $scope.matchDetail = newValue;
-            console.log(oldValue);
+            console.log(res);
+            console.log("경기 디테일");
         });
+        
+        // $rootScope.$watch(function(){
+        //     return matchesService.matchdataDetail[1];
+        // },function(newValue,oldValue)
+        // {
+        //     $scope.matchDetail = newValue;
+        //     console.log(oldValue);
+        // });
 
         
 }]);

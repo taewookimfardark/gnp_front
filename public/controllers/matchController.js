@@ -1,13 +1,12 @@
 gnp_app.controller("matchController", ["$scope", "httpRequest","$mdDialog","$mdMedia","$rootScope", "matchesService", "$rootScope",
     function ($scope, httpRequest, $mdDialog, $mdMedia, $rootScope, matchesService)
 {
-
-    $scope.matchList = matchesService.matchdata[1];
-    $rootScope.$watch(function () {
-        return matchesService.matchdata[1];
-    }, function (newValue, oldValue) {
-        $scope.matchList = newValue;
-        console.log(oldValue);
+    matchesService.getMatches(function(res)
+    {
+        console.log("경기 업데이트 완료");
+        console.log(res);
+        $scope.matchList = matchesService.matchdata[0];
+        console.log($scope.matchList);
     });
 
     

@@ -1,30 +1,12 @@
-gnp_app.controller('playerRecordController', ["$scope", "httpRequest","recordsService","$rootScope", function ($scope, httpRequest,
-recordsService,$rootScope) {
+gnp_app.controller('playerRecordController', ["$scope", "httpRequest","recordsService", function ($scope, httpRequest,
+recordsService) {
 
-    $scope.playerrecord = [];
-
-    $rootScope.$watch(function()
+    recordsService.getRecordPage(function(res)
     {
-        return recordsService.playerRecordJoinUser[1];
-    },
-        function(newValue,oldValue)
-        {
-            console.log(newValue);
-            for(var index = 0; index < newValue.length; index ++)
-            {
-                console.log("dfdf");
-                var temp = {"Name" :'',"Backnumber":'',"Games":'',"Points":'',"Rebounds":'',"Assists":''};
-                temp.Name = newValue[index]['user'].name;
-                temp.Backnumber = newValue[index]['user'].backnumber;
-                temp.Games = newValue[index]['record'].games;
-                temp.Points = parseFloat(newValue[index]['record'].points/temp.Games).toFixed(2);
-                temp.Rebounds = parseFloat(newValue[index]['record'].rebounds/temp.Games).toFixed(2);
-                temp.Assists = parseFloat(newValue[index]['record'].assists/temp.Games).toFixed(2);
-
-                $scope.playerrecord.push(temp);
-            }
-            console.log(oldValue);
-        }
-    );
+        console.log("선수 개인기록");
+        console.log(res);
+        $scope.playerrecord = recordsService.playerRecordJoinUser[0];
+        console.log($scope.playerrecord);
+    });
 
 }]);

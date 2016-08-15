@@ -36,39 +36,24 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
         score_enemy : $scope.scoreenemy
     };
 
-    $scope.userData = usersService.userdata[1];
-    $rootScope.$watch(
-        function()
-        {
-            return usersService.userdata[1];
-        },
-        function(newValue,oldValue)
-        {
-            $scope.userData = newValue;
-            console.log(newValue);
-            for (var i = 0; i < $scope.userData.length; i++) {
-                var temp = {userid : newValue[i].id, matchid : $rootScope.matchId,
-                    backnumber: newValue[i].backnumber, name: newValue[i].name,
-                    ischecked: false, point : 0,rebound: 0,assist: 0};
-                console.log(temp);
-                $scope.userCheckbox.push(temp);
-                console.log($scope.userCheckbox);
-            }
-            console.log(oldValue);
+    usersService.getUsers(function()
+    {
+        $scope.userData = usersService.userdata[0];
+        console.log($scope.userData);
+        for (var i = 0; i < $scope.userData.length; i++) {
+            var temp = {userid : $scope.userData[i].id, matchid : $rootScope.matchId,
+                backnumber: $scope.userData[i].backnumber, name: $scope.userData[i].name,
+                ischecked: false, point : 0,rebound: 0,assist: 0};
+            $scope.userCheckbox.push(temp);
         }
-    );
-    
-    $scope.matchDetail = matchesService.matchdataDetail[1];
-    $rootScope.$watch(function()
-    {
-        return matchesService.matchdataDetail[1];
-    },
-    function(newValue,oldValue)
-    {
-        $scope.matchDetail = newValue;
-        console.log(oldValue);
     });
+    
 
+    matchesService.getMatchById($rootScope.matchId,function()
+    {
+        $scope.matchDetail = matchesService.matchdataDetail[0];
+        console.log("추가 완료");
+    });
 
 
     $scope.addmatch = function()
@@ -79,44 +64,11 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
         {
             $state.go('matchschedule');
         });
-        // httpRequest.send('POST','recordusers',$scope.userCheckbox)
-        //     .then(
-        //         function(res)
-        //         {
-        //             console.log(res);
-        //             console.log("선수기록 추가완료");
-        //             httpRequest.send('PUT', 'recordmatches/'+$rootScope.matchId, $scope.matchdata)
-        //                 .then(
-        //                     function(res)
-        //                     {
-        //                         console.log("match update!");
-        //                         console.log(res);
-        //                         alert("추가 완료!");
-        //                         $state.go('matchschedule');
-        //                     },
-        //                     function(res)
-        //                     {
-        //                         alert("fail");
-        //                         console.log(res);
-        //                     }
-        //
-        //                 );
-        //         },
-        //         function(res)
-        //         {
-        //             alert("실패");
-        //             console.log(res);
-        //         }
-        //     );
     };
 
     $scope.consolecheck = function()
     {
         console.log($scope.userCheckbox);
     }
-
-    
-
-    
 
 }]);

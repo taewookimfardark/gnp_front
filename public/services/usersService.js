@@ -1,23 +1,27 @@
 gnp_app.service('usersService', ['httpRequest', function (httpRequest) {
     var userService = this;
-    userService.userdata = ["nothing"];
-    userService.userdataById = ["nothing"];
-    userService.userdataLoginCheck= ["nothing"];
+    userService.userdata = [];
+    userService.userdataById = [];
+    userService.userdataLoginCheck= [];
 
-    httpRequest.send('GET','users')
-        .then
-        (
-        function(res)
-        {
-            userService.userdata.push(res.data.data);
-        },
-        function(res)
-        {
-            alert("fail to get users");
-            console.log(res);
-        }
+    userService.getUsers = function(callback)
+    {
+        httpRequest.send('GET','users')
+            .then
+            (
+                function(res)
+                {
+                    userService.userdata.push(res.data.data);
+                    callback();
+                },
+                function(res)
+                {
+                    alert("fail to get users");
+                    console.log(res);
+                }
 
-    );
+            );   
+    };
 
     userService.getUserById = function(userId)
     {
