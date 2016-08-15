@@ -6,6 +6,8 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
     recordService.playerRecordJoinUser = [];
     recordService.playerRecordDataByUserID = [];
     recordService.playerRecordMyRecord = [];
+    recordService.playerRecordMyAverageRecord = [];
+    recordService.matchRecordWithMatch = [];
 
     recordService.getPlayerRecord = function(callback)
     {
@@ -77,14 +79,14 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
             );   
     };
     
-    recordService.getMyRecord = function(userId)
+    recordService.getMyRecord = function(userId,callback)
     {
         httpRequest.send('GET','playerrecords/'+userId)
             .then(
                 function(res)
                 {
                     recordService.playerRecordMyRecord.push(res.data.data);
-                    console.log(res);
+                    callback(res);
                 },
                 function(res)
                 {
@@ -93,15 +95,45 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                 }
             )
         
-    }
+    };
 
-    recordService.getRecordByUserId = function(userId)
+    recordService.getMyRecordAverage = function(userId,callback)
+    {
+        httpRequest.send('GET','playerrecords/'+userId)
+            .then(
+                function(res)
+                {
+                    var temp = {
+                        "Games": '',
+                        "Points": '',
+                        "Rebounds": '',
+                        "Assists": ''
+                    };
+                    temp.Games = res.data.data.games;
+                    temp.Points = parseFloat(res.data.data.points / temp.Games).toFixed(2);
+                    temp.Rebounds = parseFloat(res.data.data.rebounds / temp.Games).toFixed(2);
+                    temp.Assists = parseFloat(res.data.data.assists / temp.Games).toFixed(2);
+                    recordService.playerRecordMyAverageRecord.push(temp);
+                    callback();
+                },
+                function(res)
+                {
+                    alert("fail to get my record");
+                    console.log(res);
+                }
+            )
+
+    }
+    
+
+    recordService.getRecordByUserId = function(userId, callback)
     {
         httpRequest.send('GET','matchrecords/user/'+userId)
             .then(
                 function(res)
                 {
                     recordService.playerRecordDataByUserID.push(res.data.data);
+                    callback(res);
                 },
                 function(res)
                 {
@@ -146,7 +178,24 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
             );
     };
     
-    
-            
+    recordService.getMatchRecordWithMatch = function(userId,callback){
+        httpRequest.send('GET','mainpage/'+userId)
+            .then(
+                function(res){
+                    var tempdata = [];
+                    for(var i=0;i<res.data.data.length;i++)
+                    {
+                        if(i==3) break;
+                        tempdata.push(res.data.data[i]);
+                    }
+                    recordService.matchRecordWithMatch.push(tempdata);
+                    callback();
+                },
+                function(res){
+                    alert("fail to get match record with match");
+                    console.log(res);
+                }       
+            );
+    };
 
 }]);

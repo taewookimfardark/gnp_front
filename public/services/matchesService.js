@@ -3,6 +3,7 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
     var matchService = this;
     matchService.matchdata = [];
     matchService.matchdataDetail = [];
+    matchService.matchdataRecent = [];
     
     matchService.getMatches = function(callback)
     {
@@ -11,7 +12,6 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                 function(res)
                 {
                     matchService.matchdata.push(res.data.data);
-                    console.log(res.data.data);
                     callback(res);
                 },
                 function(res)
@@ -20,6 +20,29 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                     console.log(res);
                 }
             );    
+    };
+
+    matchService.getRecentMatches = function(callback)
+    {
+        httpRequest.send('GET','matches')
+            .then(
+                function(res)
+                {   var tempdata = [];
+                    for(var i = 0;i<4;i++)
+                    {   
+                        if(res.data.data[res.data.data.length-i-1] == undefined) break;
+                        tempdata.push(res.data.data[res.data.data.length-i-1]);
+                    }
+                    matchService.matchdataRecent.push(tempdata);
+                    console.log(matchService.matchdataRecent[0]);
+                    callback();
+                },
+                function(res)
+                {
+                    alert("fail to get matches");
+                    console.log(res);
+                }
+            );
     };
     
     
@@ -30,7 +53,6 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                 function(res)
                 {
                     matchService.matchdataDetail.push(res.data.data);
-                    console.log(res.data.data);
                     callback(res);
                 },
                 function(res)
@@ -39,7 +61,7 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                     console.log(res);
                 }
             );
-        
     };
+    
     
 }]);

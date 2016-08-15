@@ -1,36 +1,32 @@
 gnp_app.controller("mainController", ["$scope","recordsService","matchesService","usersService","$rootScope" ,function ($scope,
 recordsService, matchesService, usersService, $rootScope) {
-    
-    $scope.recentMatchRecord = [];
-    
-    // $scope.myRecord;
-    // $scope.recentMatch;
-    // $scope.playerrecord;
 
-    recordsService.getRecordByUserId($rootScope.toolbarUserData.id);
-    
-    // $rootScope.$watch(
-    //     function()
-    //     {
-    //         return recordsService.playerRecordDataByUserID[1];
-    //     },
-    //     function(newValue, oldValue)
-    //     {
-    //         $scope.recentMyMatchRecord = [];
-    //         resdata = newValue;
-    //         console.log(resdata);
-    //         for(var i = resdata.length - 1;i>;i++)
-    //         {
-    //             $scope.recentMyMatchRecord.push(resdata[i]);
-    //         }
-    //         console.log(oldValue);
-    //     }
-    // );
-    
-    
+    recordsService.getMyRecord(
+        $rootScope.toolbarUserData.id,function(res)
+        {
+            console.log("내 개인기록");
+            $scope.myRecordData = recordsService.playerRecordMyRecord[0];
+        });
 
+    recordsService.getMatchRecordWithMatch($rootScope.toolbarUserData.id,function()
+    {
+        $scope.recentMatchRecordData = recordsService.matchRecordWithMatch[0];
+    });
     
-    
+    recordsService.getMyRecordAverage($rootScope.toolbarUserData.id,function()
+    {
+        $scope.myAverageRecord = recordsService.playerRecordMyAverageRecord[0];
+    });
+
+    matchesService.getRecentMatches(function()
+    {
+        $scope.recentMatches = matchesService.matchdataRecent[0];
+    });
+
+    recordsService.getRecordPage(function()
+    {
+        $scope.playerRecord = recordsService.playerRecordJoinUser[0];
+    });
 }]);
 
 
