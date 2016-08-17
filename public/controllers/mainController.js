@@ -1,5 +1,32 @@
-gnp_app.controller("mainController", ["$scope","recordsService","matchesService","usersService","$rootScope" ,function ($scope,
-recordsService, matchesService, usersService, $rootScope) {
+gnp_app.controller("mainController", ["$scope","recordsService","matchesService","usersService","$rootScope"
+    ,"$mdDialog", "$mdMedia",function ($scope,
+recordsService, matchesService, usersService, $rootScope, $mdDialog, $mdMedia) {
+
+    $scope.showDetail = function(ev, matchid) {
+        console.log("click");
+        $rootScope.matchId = matchid;
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+            templateUrl: 'src/match_detail.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            controller: "matchDetailController",
+            controllerAs: 'dc',
+            fullscreen: useFullScreen
+        });
+
+        $scope.$watch(function() {
+            return $mdMedia('xs') || $mdMedia('sm');
+        }, function(wantsFullScreen) {
+            $scope.customFullscreen = (wantsFullScreen === true);
+        });
+    };
+
+    $scope.getId = function(ev,matchid)
+    {
+        $rootScope.matchId = matchid;
+    };
 
     recordsService.getMyRecord(
         $rootScope.toolbarUserData.id,function(res)
@@ -11,6 +38,7 @@ recordsService, matchesService, usersService, $rootScope) {
     recordsService.getMatchRecordWithMatch($rootScope.toolbarUserData.id,function()
     {
         $scope.recentMatchRecordData = recordsService.matchRecordWithMatch[0];
+        console.log($scope.recentMatchRecordData);
     });
     
     recordsService.getMyRecordAverage($rootScope.toolbarUserData.id,function()
@@ -25,8 +53,11 @@ recordsService, matchesService, usersService, $rootScope) {
 
     recordsService.getRecordPage(function()
     {
-        $scope.playerRecord = recordsService.playerRecordJoinUser[0];
+        $scope.recordLeader = recordsService.recordLeader[0];
+        console.log($scope.recordLeader);
     });
+
+
 }]);
 
 

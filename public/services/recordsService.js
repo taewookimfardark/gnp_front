@@ -8,6 +8,9 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
     recordService.playerRecordMyRecord = [];
     recordService.playerRecordMyAverageRecord = [];
     recordService.matchRecordWithMatch = [];
+    recordService.recordLeader = [{
+        'games': undefined, 'points': undefined, 'assists': undefined, 'rebounds': undefined
+    }];
 
     recordService.getPlayerRecord = function(callback)
     {
@@ -48,7 +51,7 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
         httpRequest.send('GET','recordpage')
             .then(
                 function(res)
-                {   
+                {
                     var newValue = res.data.data;
                     var pageData = [];
                     for(var index = 0; index < newValue.length; index ++) {
@@ -67,8 +70,34 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                         temp.Rebounds = parseFloat(newValue[index]['record'].rebounds / temp.Games).toFixed(2);
                         temp.Assists = parseFloat(newValue[index]['record'].assists / temp.Games).toFixed(2);
                         pageData.push(temp);
-                    };    
+                    };
                     recordService.playerRecordJoinUser.push(pageData);
+
+                    recordService.recordLeader[0].games = pageData[0];
+                    recordService.recordLeader[0].points = pageData[0];
+                    recordService.recordLeader[0].assists = pageData[0];
+                    recordService.recordLeader[0].rebounds = pageData[0];
+
+                    for(var i = 1; i<pageData.length;i++)
+                    {
+                        if(pageData[i].Points > recordService.recordLeader[0].points.Points)
+                        {
+                            recordService.recordLeader[0].points = pageData[i];
+                        }
+                        if(pageData[i].Assists > recordService.recordLeader[0].assists.Assists)
+                        {
+                            recordService.recordLeader[0].assists = pageData[i];
+                        }
+                        if(pageData[i].Rebounds > recordService.recordLeader[0].rebounds.Rebounds)
+                        {
+                            recordService.recordLeader[0].rebounds = pageData[i];
+                        }
+                        if(pageData[i].Games > recordService.recordLeader[0].games.Games)
+                        {
+                            recordService.recordLeader[0].games = pageData[i];
+                        }
+                    }
+
                     callback(res);
                 },
                 function(res)
