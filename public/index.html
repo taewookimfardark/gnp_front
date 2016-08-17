@@ -8,12 +8,12 @@
     <link rel="stylesheet" type="text/css" href="src/css/style.css">
 </head>
 <body ng-app="gnp_app" layout="column">
-    <md-toolbar layout="row">
+    <md-toolbar class="md-whiteframe-3dp" layout="row">
         <h1>GNP</h1>
     </md-toolbar>
 
     <div class="container" layout="row" flex>
-        <md-sidenav md-is-locked-open="true" layout="column">
+        <md-sidenav md-is-locked-open="true" layout="column" class="md-whiteframe-6dp">
             <md-toolbar style="background-color:gainsboro; text-align:center;" layout="column" ng-show="loginsuccess">
                 <img src="src/img/curry.jpg" align="right">
                 <p>NO.{{toolbarUserData.backnumber}} {{toolbarUserData.name}}</p>

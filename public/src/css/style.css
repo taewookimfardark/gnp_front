@@ -1,6 +1,13 @@
 .loginBox {
     max-width:  90%;
-    width: 500px
+    width: 500px;
+    margin: 150px;
+}
+
+.join{
+    max-width:  90%;
+    width: 500px;
+    margin: 150px;
 }
 
 .stretch input  {
