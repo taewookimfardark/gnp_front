@@ -1,4 +1,5 @@
-gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$state", "usersService",function ($scope,$rootScope,httpRequest, $state,usersService) {
+gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$state", "usersService","localStorage",
+    function ($scope,$rootScope,httpRequest,$state,usersService,localStorage) {
     
     $rootScope.loginsuccess = false;
 
@@ -23,6 +24,7 @@ gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$sta
             {
                 $state.go('main');
                 $rootScope.toolbarUserData = collbackData.data;
+                localStorage.set('token',collbackData.token);
             }
         });
     };
