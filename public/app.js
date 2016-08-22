@@ -6,7 +6,6 @@ gnp_app.run(['$rootScope','$state',function($rootScope,$state)
     {
         if($state.is('login')==true)
         {
-            console.log("되고있어");
             $rootScope.loginsuccess = true;
         }
 
@@ -23,7 +22,6 @@ gnp_app.run(['$rootScope','$state',function($rootScope,$state)
 
 gnp_app.config(function($stateProvider, $urlRouterProvider)
 {
-    console.log("config on");
     $urlRouterProvider.otherwise("/login");
     
     $stateProvider

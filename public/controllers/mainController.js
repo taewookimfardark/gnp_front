@@ -36,7 +36,6 @@ recordsService, matchesService, usersService, $rootScope, $mdDialog, $mdMedia) {
     recordsService.getMatchRecordWithMatch($rootScope.toolbarUserData.id,function()
     {
         $scope.recentMatchRecordData = recordsService.matchRecordWithMatch[0];
-        console.log($scope.recentMatchRecordData);
     });
     
     recordsService.getMyRecordAverage($rootScope.toolbarUserData.id,function()
@@ -52,7 +51,6 @@ recordsService, matchesService, usersService, $rootScope, $mdDialog, $mdMedia) {
     recordsService.getRecordPage(function()
     {
         $scope.recordLeader = recordsService.recordLeader[0];
-        console.log($scope.recordLeader);
     });
 
 
