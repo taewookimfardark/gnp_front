@@ -34,7 +34,6 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                         tempdata.push(res.data.data[res.data.data.length-i-1]);
                     }
                     matchService.matchdataRecent.push(tempdata);
-                    console.log(matchService.matchdataRecent[0]);
                     callback();
                 },
                 function(res)

@@ -3,7 +3,6 @@ gnp_app.controller("mainController", ["$scope","recordsService","matchesService"
 recordsService, matchesService, usersService, $rootScope, $mdDialog, $mdMedia) {
 
     $scope.showDetail = function(ev, matchid) {
-        console.log("click");
         $rootScope.matchId = matchid;
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
         $mdDialog.show({
@@ -31,7 +30,6 @@ recordsService, matchesService, usersService, $rootScope, $mdDialog, $mdMedia) {
     recordsService.getMyRecord(
         $rootScope.toolbarUserData.id,function(res)
         {
-            console.log("내 개인기록");
             $scope.myRecordData = recordsService.playerRecordMyRecord[0];
         });
 

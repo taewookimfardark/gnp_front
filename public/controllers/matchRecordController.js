@@ -39,7 +39,6 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
     usersService.getUsers(function()
     {
         $scope.userData = usersService.userdata[0];
-        console.log($scope.userData);
         for (var i = 0; i < $scope.userData.length; i++) {
             var temp = {userid : $scope.userData[i].id, matchid : $rootScope.matchId,
                 backnumber: $scope.userData[i].backnumber, name: $scope.userData[i].name,
@@ -52,7 +51,6 @@ gnp_app.controller("matchRecordController",["$scope","$rootScope","httpRequest",
     matchesService.getMatchById($rootScope.matchId,function()
     {
         $scope.matchDetail = matchesService.matchdataDetail[0];
-        console.log("추가 완료");
     });
 
 

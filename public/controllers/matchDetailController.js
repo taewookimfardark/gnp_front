@@ -13,13 +13,4 @@ gnp_app.controller("matchDetailController", ["$scope","$mdDialog","$mdMedia","ht
             console.log("경기 디테일");
         });
         
-        // $rootScope.$watch(function(){
-        //     return matchesService.matchdataDetail[1];
-        // },function(newValue,oldValue)
-        // {
-        //     $scope.matchDetail = newValue;
-        //     console.log(oldValue);
-        // });
-
-        
 }]);

@@ -23,7 +23,6 @@ gnp_app.controller("loginController", ["$scope","$rootScope","httpRequest","$sta
             {
                 $state.go('main');
                 $rootScope.toolbarUserData = collbackData.data;
-                console.log($rootScope.toolbarUserData);
             }
         });
     };
