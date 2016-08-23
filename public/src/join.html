@@ -1,4 +1,25 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="src/css/style.css">
+</head>
+<body>
 <div class="join" layout="column" layout-align="center center" layout-fill>
+        <div flow-init="{target: '/upload'}"
+             flow-files-submitted="$flow.upload()"
+             flow-file-success="$file.msg = $message"
+             flow-file-added="fileAdded($file)"
+             flow-files-added="$flow.fileAdded( $files, $event, $flow )"
+             flow-files-submitted="someHandlerMethod( $files, $event, $flow )"
+             flow-file-retry="someHandlerMethod( $file, $flow )"
+             flow-file-error="someHandlerMethod( $file, $message, $flow )"
+             flow-error="someHandlerMethod( $file, $message, $flow )">
+            <div class="default" style="background-image: url('src/img/defaultprofile.jpg')"></div>
+            <span flow-btn><button>Upload File</button></span>
+            <!--<div class="alert" flow-drop style="height: 390px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; background-color: #858585"-->
+                 <!--flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}"-->
+                 <!--ng-style="style">-->
+                <!--<img  flow-img="$flow.files[0]" style="border-radius: 0px; height: 390px; width: 576px; z-index: 1000;"/>-->
+            <!--</div>-->
+        </div>
         <form name="projectForm">
             <md-input-container class="md-block">
                 <label>Email</label>
@@ -19,3 +40,4 @@
         </form>
         <button layout-align="center" ng-click="join()">선수등록</button>
 </div>
+</body>

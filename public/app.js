@@ -1,4 +1,4 @@
-var gnp_app = angular.module('gnp_app',['ui.router','ngMaterial','ui.grid']);
+var gnp_app = angular.module('gnp_app',['ui.router','ngMaterial','ui.grid','flow']);
 
 gnp_app.run(['$rootScope','$state',function($rootScope,$state)
 {
