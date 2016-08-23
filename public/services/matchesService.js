@@ -1,4 +1,4 @@
-gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
+gnp_app.service('matchesService', ['httpRequest','$state', function (httpRequest,$state) {
     
     var matchService = this;
     matchService.matchdata = [];
@@ -16,8 +16,15 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get matches");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get matches");
+                        console.log(res);
+                    }
+                    
                 }
             );    
     };
@@ -38,8 +45,14 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get matches");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get matches");
+                        console.log(res);
+                    }
                 }
             );
     };
@@ -56,8 +69,14 @@ gnp_app.service('matchesService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get matches by id");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get matches by id");
+                        console.log(res);
+                    }
                 }
             );
     };

@@ -1,4 +1,4 @@
-gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
+gnp_app.service('recordsService', ['httpRequest','$state', function (httpRequest, $state) {
 
     var recordService = this;
     recordService.playerRecordData = [];
@@ -23,8 +23,14 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get player records");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get player records");
+                        console.log(res);   
+                    }
                 }
             );
     };
@@ -40,8 +46,14 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get match records");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get match records");
+                        console.log(res);   
+                    }
                 }
             );
     };
@@ -102,8 +114,14 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get player join user");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get player join user");
+                        console.log(res);   
+                    }
                 }
             );   
     };
@@ -119,8 +137,14 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get my record");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get my record");
+                        console.log(res);   
+                    }
                 }
             )
         
@@ -147,8 +171,14 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get my record");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get my record");
+                        console.log(res);   
+                    }
                 }
             )
 
@@ -166,8 +196,14 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get match record by user id");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get match record by user id");
+                        console.log(res);   
+                    }
                 }
             )
     };
@@ -221,8 +257,14 @@ gnp_app.service('recordsService', ['httpRequest', function (httpRequest) {
                     callback();
                 },
                 function(res){
-                    alert("fail to get match record with match");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get match record with match");
+                        console.log(res);   
+                    }
                 }       
             );
     };

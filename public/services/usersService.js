@@ -1,4 +1,4 @@
-gnp_app.service('usersService', ['httpRequest', function (httpRequest) {
+gnp_app.service('usersService', ['httpRequest','$state', function (httpRequest, $state) {
     var userService = this;
     userService.userdata = [];
     userService.userdataById = [];
@@ -16,8 +16,14 @@ gnp_app.service('usersService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get users");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get users");
+                        console.log(res);   
+                    }
                 }
 
             );   
@@ -34,8 +40,14 @@ gnp_app.service('usersService', ['httpRequest', function (httpRequest) {
                 },
                 function(res)
                 {
-                    alert("fail to get user by id");
-                    console.log(res);
+                    if(res.statusText == "Unauthorized") {
+                        alert("인증정보가 없습니다");
+                        $state.go('logout');
+                    }
+                    else{
+                        alert("fail to get user by id");
+                        console.log(res);   
+                    }
                 }
             );
     };
